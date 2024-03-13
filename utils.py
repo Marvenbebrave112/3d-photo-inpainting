@@ -69,7 +69,7 @@ def filter_irrelevant_edge_new(self_edge, comp_edge, other_edges, other_edges_wi
     self_edge = self_edge.squeeze()
     dilate_bevel_self_edge = cv2.dilate((self_edge + comp_edge).astype(np.uint8), np.array([[1,1,1],[1,1,1],[1,1,1]]), iterations=1)
     dilate_cross_self_edge = cv2.dilate((self_edge + comp_edge).astype(np.uint8), np.array([[0,1,0],[1,1,1],[0,1,0]]).astype(np.uint8), iterations=1)
-    edge_ids = np.unique(other_edges_with_id * context + (-1) * (1 - context)).astype(np.int)
+    edge_ids = np.unique(other_edges_with_id * context + (-1) * (1 - context)).astype(np.int32)
     end_depth_maps = np.zeros_like(self_edge)
     self_edge_ids = np.sort(np.unique(other_edges_with_id[self_edge > 0]).astype(np.int))
     self_edge_ids = self_edge_ids[1:] if self_edge_ids.shape[0] > 0  and self_edge_ids[0] == -1 else self_edge_ids
